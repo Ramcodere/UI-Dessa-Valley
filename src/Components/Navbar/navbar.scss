@@ -1,0 +1,139 @@
+
+:root {
+  --PrimaryColor: hsl(199, 100%, 33%);
+  --SecondaryColor: hsl(187, 85%, 43%);
+  --whiteColorDeam: rgba(255, 255, 255, 0.8);
+  --textColor: hsl(240, 4%, 36%);
+  --blackColor: hsl(201, 33%, 16%);
+}
+
+.navBarSection {
+  .header {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--whiteColorDeam);
+    width: 100%;
+    padding: 1rem;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(128, 171, 218, 0.904);
+    backdrop-filter: blur(2px); /* Blur effect on the navbar */
+    transition: backdrop-filter 0.3s ease;
+
+    .logo {
+      color: var(--blackColor);
+      font-weight: 600;
+      cursor: pointer;
+      align-items: center;
+
+      .icon {
+        font-size: 25px;
+        color: var(--PrimaryColor);
+      }
+    }
+
+    .navBar {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+
+      @media screen and (max-width: 768px) {
+        position: absolute;
+        background: rgba(232, 238, 239, 0.814); /* Semi-transparent background */
+        flex-direction: column;
+        height: max-content;
+        width: 80%;
+        border-radius: 1rem;
+        top: 6rem;
+        right: 1rem;
+        padding: 1.5rem;
+        transform: translateX(100%);
+        z-index: 1000;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px); /* Blur effect for the mobile menu */
+        transition: transform 0.3s ease-in-out;
+
+        &.activeNavbar {
+          transform: translateX(0%);
+        }
+      }
+
+      .navLists {
+        display: flex;
+        gap: 1.5rem;
+
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .navItem {
+          .navLink {
+            font-size: 1rem;
+            color: var(--textColor);
+            font-weight: 500;
+            transition: color 0.2s ease;
+
+            &:hover {
+              color: var(--PrimaryColor);
+            }
+          }
+        }
+      }
+
+      .btn {
+        background: var(--PrimaryColor);
+        color: #fff;
+        padding: 0.5rem 1.2rem;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background: var(--SecondaryColor);
+        }
+
+        a {
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+    }
+
+    .toggleNavbar {
+      display: none;
+      cursor: pointer;
+
+      .icon {
+        font-size: 24px;
+        color: var(--PrimaryColor);
+      }
+
+      @media screen and (max-width: 768px) {
+        display: block;
+      }
+    }
+
+    .closeNavbar {
+      display: none;
+
+      @media screen and (max-width: 768px) {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1.2rem;
+        cursor: pointer;
+
+        .icon {
+          font-size: 24px;
+          color: var(--PrimaryColor);
+        }
+      }
+    }
+  }
+}
+
+
+
+
