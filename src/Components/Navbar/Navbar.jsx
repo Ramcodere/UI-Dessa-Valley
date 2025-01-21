@@ -76,23 +76,11 @@ const Navbar = () => {
         </header>
       </section>
 
-      {/* Detailed Card */}
-      {/* {isCardVisible && (
-        <div className="detailCard">
-          <div className="cardContent">
-            <h2>Tour Package Details</h2>
-            <p>
-              Explore our exciting tour packages with exclusive deals and
-              destinations tailored for you!
-            </p>
-            <button className="btn" onClick={closeCard}>
-              Close
-            </button>
-          </div>
-        </div>
-      )} */}
+      
     </>
   );
 };
 
 export default Navbar;
+
+

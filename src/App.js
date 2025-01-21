@@ -4,17 +4,23 @@ import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home/Home';
 import Footer from './Components/Footer/Footer';
 import Main from './Components/Main/Main';
+import About from './Components/About/About';
+import Page from './Components/Page/Pages';
+import Contact from './Components/Contact/Contact';
 
-const App = () => {
-  // console.log("App component is rendering");
+
+function App() {
   return (
-    <>
-     <Navbar/> 
-     <Home/>
-    {/* <Footer/> */}
-    <Main/> 
-    </>
+    <div className="App">
+      <Navbar />
+      <Home />
+      <Main />
+      <About />
+      <Page />
+      <Contact/>
+      <Footer />
+    </div>
+  );
+}
 
-  )
-};
 export default App;
