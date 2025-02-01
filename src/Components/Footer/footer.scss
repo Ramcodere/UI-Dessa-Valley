@@ -1,9 +1,20 @@
 
+
+// Variables
+$primary-color: #ff6b6b;
+$secondary-color: #292938;
+$background-color: #1e1e2f;
+$text-color: #fff;
+$text-light: #ccc;
+$border-radius: 12px;
+$transition: all 0.3s ease;
+
 .footer {
-  background: linear-gradient(135deg, #1e1e2f, #252534);
-  color: #fff;
+  background: $background-color;
+  color: $text-color;
   font-family: 'Arial', sans-serif;
-  padding: 3rem 1.5rem;
+  padding: 4rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   .container {
     max-width: 1200px;
@@ -11,49 +22,56 @@
 
     .newsletter {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
 
       h2 {
-        font-size: 2rem;
-        color: #ff6b6b;
+        font-size: 2.2rem;
+        color: $primary-color;
         margin-bottom: 0.5rem;
       }
 
       p {
         font-size: 1rem;
-        color: #ddd;
-        margin-bottom: 1rem;
+        color: $text-light;
+        margin-bottom: 1.5rem;
       }
 
       .inputDiv {
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: 0.5rem;
 
         input {
-          padding: 0.8rem;
-          width: 320px;
+          padding: 0.8rem 1.2rem;
+          width: 300px;
           border: none;
-          border-radius: 30px 0 0 30px;
-          background: #333;
-          color: #fff;
+          border-radius: $border-radius;
+          background: rgba(255, 255, 255, 0.1);
+          color: $text-color;
           outline: none;
+          transition: $transition;
 
           &::placeholder {
-            color: #aaa;
+            color: rgba(255, 255, 255, 0.6);
+          }
+
+          &:focus {
+            background: rgba(255, 255, 255, 0.2);
           }
         }
 
         .btn {
           padding: 0.8rem 1.5rem;
-          background: #ff6b6b;
-          color: #fff;
-          border-radius: 0 30px 30px 0;
+          background: $primary-color;
+          color: $text-color;
+          border: none;
+          border-radius: $border-radius;
           cursor: pointer;
-          transition: background 0.3s;
+          transition: $transition;
 
           &:hover {
-            background: #ff5252;
+            background: darken($primary-color, 10%);
           }
 
           .icon {
@@ -65,38 +83,39 @@
 
     .footerGrid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* Ensures all sections align in a row */
+      grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
-      align-items: start; /* Align items to the top of the row */
+      margin-bottom: 3rem;
 
       @media (max-width: 768px) {
-        grid-template-columns: 1fr; /* Stacks sections vertically on smaller screens */
+        grid-template-columns: 1fr;
       }
 
-      .about, .contact, .gallery {
-        background: #292938;
+      .about, .quickLinks, .contact {
+        background: $secondary-color;
         padding: 1.5rem;
-        border-radius: 8px;
+        border-radius: $border-radius;
 
         h3 {
           font-size: 1.5rem;
-          color: #ff6b6b;
+          color: $primary-color;
           margin-bottom: 1rem;
         }
 
-        p {
+        p, li {
           margin-bottom: 1rem;
           font-size: 1rem;
-          color: #ccc;
+          color: $text-light;
 
           .icon {
             margin-right: 0.5rem;
-            color: #ff6b6b;
+            color: $primary-color;
           }
 
           a {
-            color: #ff6b6b;
+            color: $primary-color;
             text-decoration: none;
+            transition: $transition;
 
             &:hover {
               text-decoration: underline;
@@ -110,51 +129,40 @@
 
           .icon {
             font-size: 1.5rem;
-            color: #fff;
-            transition: color 0.3s;
+            color: $text-color;
+            transition: $transition;
 
             &:hover {
-              color: #ff6b6b;
+              color: $primary-color;
             }
           }
         }
 
-        .galleryImages {
-          display: flex;
-          gap: 1rem;
-          flex-wrap: wrap;
+        ul {
+          list-style: none;
+          padding: 0;
 
-          img {
-            width: 90px;
-            height: 90px;
-            border-radius: 10px;
-            transition: transform 0.3s, box-shadow 0.3s;
-
-            &:hover {
-              transform: scale(1.1);
-              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            }
+          li {
+            margin-bottom: 0.8rem;
           }
         }
       }
     }
 
     .footerBottom {
-      margin-top: 3rem;
       text-align: center;
-      border-top: 1px solid #444;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       padding-top: 1.5rem;
 
       p {
         font-size: 0.9rem;
-        color: #aaa;
+        color: $text-light;
 
         .highlight {
-          color: #ff6b6b;
+          color: $primary-color;
           font-weight: bold;
         }
       }
     }
   }
 }
-

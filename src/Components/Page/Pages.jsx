@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './page.scss';
 
 const Page = () => {
@@ -11,14 +11,33 @@ const Page = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % videos.length);
-  };
+  const handleNext = useCallback(() => {
+    setIsFading(true);
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % videos.length);
+      setIsFading(false);
+    }, 500);
+  }, []);
 
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length);
-  };
+  const handlePrev = useCallback(() => {
+    setIsFading(true);
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev - 1 + videos.length) % videos.length);
+      setIsFading(false);
+    }, 500);
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'ArrowLeft') handlePrev();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleNext, handlePrev]);
 
   return (
     <section className="videoSlider">
@@ -28,14 +47,34 @@ const Page = () => {
       </div>
 
       <div className="sliderContainer">
-        <video
-          src={videos[currentIndex]}
-          controls
-          autoPlay
-          muted
-          loop
-          className="sliderVideo"
-        ></video>
+        <div className="videoWrapper">
+          {isLoading && <div className="loader"></div>}
+          <video
+            key={currentIndex}
+            src={videos[currentIndex]}
+            controls
+            autoPlay
+            muted
+            loop
+            className={`sliderVideo ${isFading ? 'fade-out' : ''}`}
+            onLoadStart={() => setIsLoading(true)}
+            onLoadedData={() => setIsLoading(false)}
+            preload="auto"
+          />
+        </div>
+
+        {/* Preload adjacent videos */}
+        {videos.map((video, index) => (
+          (index === (currentIndex + 1) % videos.length || 
+           index === (currentIndex - 1 + videos.length) % videos.length) && (
+            <video 
+              key={`preload-${index}`}
+              src={video}
+              preload="auto"
+              style={{ display: 'none' }}
+            />
+          )
+        ))}
 
         <div className="controls">
           <button onClick={handlePrev} className="prev" aria-label="Previous Video">
@@ -51,7 +90,13 @@ const Page = () => {
             <span
               key={index}
               className={`dot ${currentIndex === index ? "active" : ""}`}
-              onClick={() => setCurrentIndex(index)}
+              onClick={() => {
+                setIsFading(true);
+                setTimeout(() => {
+                  setCurrentIndex(index);
+                  setIsFading(false);
+                }, 500);
+              }}
             ></span>
           ))}
         </div>

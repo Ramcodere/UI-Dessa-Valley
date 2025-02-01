@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import './footer.scss';
 import { FiSend } from 'react-icons/fi';
@@ -6,6 +7,13 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from 'rea
 import { BsTelephone, BsGeoAlt } from 'react-icons/bs';
 
 const Footer = () => {
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    console.log("Subscribed with:", email); // Replace with API call or other logic
+    alert("Thank you for subscribing!");
+  };
+
   return (
     <footer className="footer">
       <div className="container">
@@ -13,15 +21,17 @@ const Footer = () => {
         <div className="newsletter">
           <h2>Stay Updated</h2>
           <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
-          <div className="inputDiv">
-            <input type="email" placeholder="Enter your email address" />
-            <button
-              className="btn flex"
-              onClick={() => window.open('https://www.linkedin.com', '_blank')}
-            >
+          <form onSubmit={handleSubscribe} className="inputDiv">
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email address"
+              required
+            />
+            <button type="submit" className="btn flex">
               Subscribe <FiSend className="icon" />
             </button>
-          </div>
+          </form>
         </div>
 
         {/* Main Footer Content */}
@@ -30,40 +40,42 @@ const Footer = () => {
           <div className="about">
             <h3>Dessa Valley</h3>
             <p>
-              Discover the world's most amazing destinations with us. Tailor-made experiences to make your journeys unforgettable. Discover the world's most amazing destinations with us. ys unforgettable. </p>
+              Discover the world's most amazing destinations with us. Tailor-made experiences to make your journeys unforgettable.
+            </p>
             <div className="socialIcons">
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.instagram.com/dessa.valley_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <FaInstagram className="icon" />
               </a>
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.facebook.com/share/g/1AzPGBLqj4/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <FaFacebookF className="icon" />
               </a>
-              <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                 <FaTwitter className="icon" />
               </a>
-              <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <FaWhatsapp className="icon" />
               </a>
             </div>
           </div>
 
+          {/* Quick Links Section */}
+          <div className="quickLinks">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="/home">Home</a></li>
+              <li><a href="/main">Packages</a></li>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/page">Pages</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
           {/* Contact Section */}
           <div className="contact">
             <h3>Contact Us</h3>
-            <p><BsTelephone className="icon" /> +09 876 543 210</p>
-            <p><FaEnvelope className="icon" /> <a href="mailto:support@tourm.com">support@tourm.com</a></p>
-            <p><BsGeoAlt className="icon" /> 789 Inner Lane, Holy Park, California, USA</p>
-          </div>
-
-          {/* Gallery Section */}
-          <div className="gallery">
-            <h3>Gallery</h3>
-            <div className="galleryImages">
-              <img src="https://cdn.pixabay.com/photo/2016/10/05/17/26/priest-1717195_960_720.jpg" alt="Gallery 1" />
-              <img src="https://cdn.pixabay.com/photo/2024/05/10/09/22/mountains-8752573_960_720.jpg" alt="Gallery 2" />
-              <img src="https://cdn.pixabay.com/photo/2019/03/12/17/05/himalaya-foothills-4051276_960_720.jpg" alt="Gallery 4" />
-
-            </div>
+            <p><BsTelephone className="icon" /> +91 876 543 210</p>
+            <p><FaEnvelope className="icon" /> <a href="mailto:support@tourm.com">desaavalley@tourm.com</a></p>
+            <p><BsGeoAlt className="icon" /> Desaa Valley, Kashmir, INDIA</p>
           </div>
         </div>
 

@@ -1,58 +1,139 @@
 
+
 .about {
-    padding: 4rem 2rem;
+  padding: 8rem 2rem;
+  overflow: hidden;
   
-    .secContainer {
-      max-width: 1200px;
-      margin: auto;
-  
-      .title {
-        text-align: center;
-        font-size: 2rem;
-        margin-bottom: 2rem;
-        color: var(--PrimaryColor);
+  .secContainer {
+    max-width: 1200px;
+    margin: auto;
+
+    .title {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 4rem;
+      color: transparent;
+      background: linear-gradient(45deg, var(--PrimaryColor), var(--SecondaryColor));
+      -webkit-background-clip: text;
+      background-clip: text;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: var(--PrimaryColor);
+        transition: width 0.3s ease;
       }
-  
-      .content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+
+      @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
         gap: 2rem;
-  
-        @media screen and (max-width: 768px) {
-          grid-template-columns: 1fr;
-        }
-  
-        .videoSection {
-          .video {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .videoSection {
+        perspective: 1000px;
+        
+        .videoWrapper {
+          border-radius: 20px;
+          overflow: hidden;
+          transform: rotateY(10deg) rotateX(-5deg);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          
+          &:hover {
+            transform: rotateY(0) rotateX(0);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
           }
         }
-  
-        .textSection {
-          p {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: var(--textColor);
-            margin-bottom: 1.5rem;
-          }
-  
-          .btn {
+
+        .video {
+          width: 100%;
+          height: auto;
+          display: block;
+          transform-origin: center;
+        }
+      }
+
+      .textSection {
+        p {
+          font-size: 1.1rem;
+          line-height: 1.8;
+          color: var(--textColor);
+          margin-bottom: 2rem;
+          position: relative;
+          padding-left: 2rem;
+          
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5em;
+            height: 80%;
+            width: 3px;
             background: var(--PrimaryColor);
-            color: var(--whiteColor);
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-  
-            &:hover {
-              background: var(--SecondaryColor);
+          }
+        }
+
+        .btn {
+          position: relative;
+          background: linear-gradient(45deg, var(--PrimaryColor), var(--SecondaryColor));
+          color: var(--whiteColor);
+          padding: 1rem 2rem;
+          border-radius: 50px;
+          font-weight: 600;
+          cursor: pointer;
+          overflow: hidden;
+          border: none;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          transition: all 0.3s ease;
+
+          .arrow {
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+          }
+
+          &:hover {
+            gap: 1rem;
+            box-shadow: 0 10px 20px rgba(var(--PrimaryColor), 0.3);
+            
+            .arrow {
+              transform: translateX(5px);
             }
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease;
+          }
+
+          &:active::after {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
           }
         }
       }
     }
   }
-  
+}

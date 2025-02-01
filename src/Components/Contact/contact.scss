@@ -1,87 +1,182 @@
+
+// contact.scss
+@use 'sass:math';
+
+$primary-color: #6366f1;
+$secondary-color: #4f46e5;
+$accent-color: #f472b6;
+$text-color: #1e293b;
+$transition-speed: 0.3s;
+
+@mixin hover-effect {
+  transition: all $transition-speed ease;
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
 .contactPage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem 2rem;
-  background: #f9f9f9;
+  position: relative;
+  padding: 8rem 2rem;
+  background: linear-gradient(135deg, #f0f4ff 0%, #f8fafc 100%);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+
+  .contactHeading {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: $text-color;
+    margin-bottom: 3rem;
+    text-align: center;
+    position: relative;
+
+    .headingUnderline {
+      width: 80px;
+      height: 4px;
+      // background: $primary-color;
+      background: rgba(235, 49, 76, 0.89);
+
+      margin: 1rem auto;
+      border-radius: 2px;
+    }
+  }
 
   .contactContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    width: 100%;
-    max-width: 1200px;
-    background: var(--whiteColor);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 2rem;
+    padding: 4rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15),
+                0 0 30px rgba($primary-color, 0.1);
 
-    @media screen and (max-width: 768px) {
+    @media (max-width: 1024px) {
       grid-template-columns: 1fr;
+      padding: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      padding: 2rem;
     }
   }
 
   .contactForm {
-    padding: 2rem;
-
-    h2 {
-      font-size: 2rem;
-      color: var(--PrimaryColor);
-      margin-bottom: 1rem;
+    .animated-text {
+      font-size: 1.1rem;
+      color: lighten($text-color, 20%);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
     }
 
-    p {
-      color: var(--textColor);
-      margin-bottom: 1.5rem;
-    }
+    .formGroup {
+      margin-bottom: 1.8rem;
 
-    form {
-      .formGroup {
-        margin-bottom: 1.5rem;
+      label {
+        display: block;
+        margin-bottom: 0.6rem;
+        font-weight: 500;
+        color: $text-color;
 
-        label {
-          display: block;
-          font-size: 1rem;
-          color: var(--textColor);
-          margin-bottom: 0.5rem;
-        }
-
-        input, textarea {
-          width: 100%;
-          padding: 0.8rem;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          font-size: 1rem;
-
-          &:focus {
-            border-color: var(--PrimaryColor);
-            outline: none;
-          }
+        .required {
+          color: #ef4444;
+          margin-left: 0.3rem;
         }
       }
 
-      .btn {
-        background: var(--PrimaryColor);
-        color: var(--whiteColor);
-        padding: 0.8rem 1.5rem;
-        border: none;
-        border-radius: 5px;
+      .input-field {
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 0.75rem;
         font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s ease;
+        transition: all $transition-speed ease;
+        background: #f8fafc;
 
-        &:hover {
-          background: var(--SecondaryColor);
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+          background: white;
         }
+
+        &::placeholder {
+          color: #94a3b8;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+    }
+
+   
+
+    .btn {
+      background: linear-gradient(135deg, var(--PrimaryColor), var(--SecondaryColor));
+      color: #ffffff;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &-loader {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(white, 0.2);
+            opacity: 0;
+            transition: opacity $transition-speed;
+          }
+      
+      &:hover {
+        filter: brightness(1.2);
+        transform: translateY(-2px);
+      }
+    }
+    
+
+
+  }
+
+  .contactImage {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    @include hover-effect;
+
+    .image-wrapper {
+      position: relative;
+      height: 100%;
+      min-height: 400px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 1rem;
+      }
+
+      .image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(45deg, rgba($primary-color, 0.15), rgba($accent-color, 0.1));
       }
     }
   }
 
-  .contactImage {
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+  @media (max-width: 768px) {
+    padding: 4rem 1rem;
+
+    .contactHeading {
+      font-size: 2.5rem;
     }
   }
 }

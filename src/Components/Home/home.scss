@@ -1,111 +1,12 @@
 
-// .home {
-//   position: relative;
-//   width: 100%;
-//   height: 100vh;
-//   overflow: hidden;
+// home.scss
+@use 'sass:math';
 
-//   .backgroundVideo {
-//     width: 100%;
-//     height: 100%;
-//     object-fit: cover;
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     z-index: -1;
-//   }
-
-//   .overlay {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     background: rgba(0, 0, 0, 0.3);
-//     z-index: 1;
-//   }
-
-//   .slogan {
-//     position: absolute;
-//     top: 50%;
-//     left: 50%;
-//     transform: translate(-50%, -50%);
-//     text-align: center;
-//     color: rgba(255, 255, 255, 0.9);
-//     z-index: 2;
-
-//     .main-title {
-//       font-size: 4rem;
-//       font-weight: bold;
-//       letter-spacing: 2px;
-//       background: rgba(124, 204, 234, 0.634);
-//       -webkit-background-clip: text;
-//       -webkit-text-fill-color: transparent;
-//     }
-
-//     .blue-line {
-//       width: 60px;
-//       height: 4px;
-//       margin: 1rem auto;
-//       background: #ff0011;
-//       border-radius: 2px;
-//     }
-
-//     .sub-title {
-//       font-size: 1.5rem;
-//       font-weight: 500;
-//       letter-spacing: 1px;
-//     }
-
-//     @media screen and (max-width: 768px) {
-//       .main-title {
-//         font-size: 3rem;
-//       }
-//       .sub-title {
-//         font-size: 1.2rem;
-//       }
-//     }
-//   }
-
-//   .scroll-indicator {
-//     position: absolute;
-//     bottom: 1rem;
-//     left: 50%;
-//     transform: translateX(-50%);
-//     text-align: center;
-//     cursor: pointer;
-//     z-index: 2;
-//     color: rgba(255, 255, 255, 0.9);
-//     animation: bounce 5s infinite;
-
-//     .scroll-text {
-//       font-size: 1rem;
-//       font-weight: 500;
-//       margin-bottom: 0.5rem;
-//     }
-
-//     .arrow {
-//       font-size: 2rem;
-//     }
-
-//     &:hover {
-//       color: #90c1d5;
-//     }
-//   }
-
-//   @keyframes bounce {
-//     0%, 20%, 50%, 80%, 100% {
-//       transform: translateX(-50%) translateY(0);
-//     }
-//     40% {
-//       transform: translateX(-50%) translateY(-10px);
-//     }
-//     60% {
-//       transform: translateX(-50%) translateY(-5px);
-//     }
-//   }
-// }
-
+// Variables
+$primary-color: #ff7e5f;
+$text-light: #ffffff;
+$text-dark: #2a2a2a;
+$easing: cubic-bezier(0.23, 1, 0.32, 1);
 
 .home {
   position: relative;
@@ -115,6 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  perspective: 1000px;
 
   .backgroundVideo {
     width: 100%;
@@ -124,116 +26,215 @@
     top: 0;
     left: 0;
     z-index: -1;
-    filter: brightness(0.7);
-  }
-
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    // background: linear-gradient(180deg, rgba(211, 216, 218, 0.5) 0%, rgba(0, 0, 0, 0.9) 100%);
-    z-index: 1;
+    filter: brightness(1);
+    transform: scale(1.05);
+    transition: transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .slogan {
     position: relative;
     text-align: center;
     z-index: 2;
-    color: #fff;
-    animation: fadeIn 1.5s ease-in-out;
+    color: $text-light;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
 
-    .main-title {
-      font-size: 4rem;
-      font-weight: bold;
-      letter-spacing: 3px;
+    &.animate-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .modern-title {
+      font-size: 4.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      background: linear-gradient(90deg, #91d8f0, #07849a);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: textGlow 2s infinite alternate;
+      display: flex;
+      gap: 1rem;
+      margin: 0 auto 1.5rem;
+      justify-content: center;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
       @media screen and (max-width: 768px) {
-        font-size: 2.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 3rem;
+      }
+
+      .title-part {
+        position: relative;
+        display: inline-block;
+        padding: 0 0.5rem;
+        transform: translateY(30px);
+        opacity: 0;
+        animation: titleReveal 0.8s $easing forwards;
+        
+        &:nth-child(1) { animation-delay: 0.3s; }
+        &:nth-child(2) { animation-delay: 0.6s; }
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 0;
+          width: 0;
+          height: 3px;
+          background: $primary-color;
+          transition: width 0.4s ease-out;
+        }
+
+        &:hover::after {
+          width: 100%;
+        }
       }
     }
 
-    .blue-line {
-      width: 80px;
-      height: 5px;
-      margin: 1.5rem auto;
-      background: #c43d0c;
-      border-radius: 2px;
+    .dynamic-line {
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, transparent, $primary-color, transparent);
+      margin: 2rem auto;
+      animation: lineReveal 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+      animation-delay: 1s;
     }
 
     .sub-title {
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.8);
-      margin-top: 1rem;
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease-out forwards;
+      animation-delay: 1.4s;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+      color: rgba($text-light, 0.9);
 
       @media screen and (max-width: 768px) {
-        font-size: 1rem;
+        font-size: 1.1rem;
+        padding: 0 1rem;
       }
     }
   }
 
   .scroll-indicator {
     position: absolute;
-    bottom: 2rem;
+    bottom: 3rem;
     left: 50%;
     transform: translateX(-50%);
-    text-align: center;
-    cursor: pointer;
     z-index: 2;
-    color: rgba(255, 255, 255, 0.8);
-    animation: bounce 3s infinite;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 2s;
 
-    .scroll-text {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    .mouse {
+      width: 24px;
+      height: 38px;
+      border: 2px solid rgba($text-light, 0.8);
+      border-radius: 12px;
+      margin: 0 auto 8px;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 8px;
+        background: rgba($text-light, 0.8);
+        left: 50%;
+        top: 6px;
+        transform: translateX(-50%);
+        border-radius: 2px;
+        animation: mouseScroll 2s infinite;
+      }
     }
 
     .arrow {
-      font-size: 2rem;
+      font-size: 1.8rem;
+      animation: bounce 2s infinite;
+      color: rgba($text-light, 0.8);
     }
 
     &:hover {
-      color: #ff7e5f;
+      .mouse {
+        border-color: $primary-color;
+        &::after { background: $primary-color; }
+      }
+      .arrow { color: $primary-color; }
     }
   }
+}
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+// Animations
+@keyframes titleReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   }
+}
 
-  @keyframes textGlow {
-    from {
-      text-shadow: 0 0 10px #b9dfec, 0 0 20px #0ee0f3, 0 0 30px #ea8232;
-    }
-    to {
-      text-shadow: 0 0 20px #5f78867d, 0 0 30px #89cbdc, 0 0 40px #e16a0f;
-    }
+@keyframes lineReveal {
+  0% {
+    width: 0;
+    opacity: 0;
   }
+  50% {
+    width: 200px;
+    opacity: 1;
+  }
+  100% {
+    width: 120px;
+    opacity: 0.8;
+  }
+}
 
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateX(-50%) translateY(0);
+@keyframes fadeUp {
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mouseScroll {
+  0%, 20% { transform: translate(-50%, 0); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translate(-50%, 12px); opacity: 0; }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+// Responsive Adjustments
+@media screen and (max-width: 480px) {
+  .home {
+    .slogan {
+      .modern-title {
+        font-size: 2.5rem;
+      }
+      .sub-title {
+        font-size: 1rem;
+      }
     }
-    40% {
-      transform: translateX(-50%) translateY(-10px);
-    }
-    60% {
-      transform: translateX(-50%) translateY(-5px);
+    .scroll-indicator {
+      bottom: 1.5rem;
     }
   }
 }
