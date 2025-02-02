@@ -3,7 +3,7 @@
 import React from 'react';
 import './footer.scss';
 import { FiSend } from 'react-icons/fi';
-import { FaFacebookF, FaTwitter, FaInstagram, FaWhatsapp, FaEnvelope } from 'react-icons/fa';
+import { FaFacebookF, FaYoutube, FaInstagram, FaWhatsapp, FaEnvelope } from 'react-icons/fa';
 import { BsTelephone, BsGeoAlt } from 'react-icons/bs';
 
 const Footer = () => {
@@ -42,15 +42,16 @@ const Footer = () => {
             <p>
               Discover the world's most amazing destinations with us. Tailor-made experiences to make your journeys unforgettable.
             </p>
+
             <div className="socialIcons">
               <a href="https://www.instagram.com/dessa.valley_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <FaInstagram className="icon" />
               </a>
-              <a href="https://www.facebook.com/share/g/1AzPGBLqj4/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <a href="https://www.facebook.com/share/1A4baR3ocg/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <FaFacebookF className="icon" />
               </a>
-              <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                <FaTwitter className="icon" />
+              <a href="https://www.youtube.com/@dessavalley" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <FaYoutube className="icon" />
               </a>
               <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <FaWhatsapp className="icon" />

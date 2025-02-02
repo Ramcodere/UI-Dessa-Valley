@@ -1,5 +1,4 @@
 
-
 // Variables
 $primary-color: #ff6b6b;
 $secondary-color: #292938;
@@ -41,16 +40,18 @@ $transition: all 0.3s ease;
         justify-content: center;
         align-items: center;
         gap: 0.5rem;
+        flex-wrap: wrap;
 
         input {
-          padding: 0.8rem 1.2rem;
-          width: 300px;
           border: none;
           border-radius: $border-radius;
           background: rgba(255, 255, 255, 0.1);
           color: $text-color;
           outline: none;
           transition: $transition;
+          padding: 0.6rem 1rem;
+          width: 250px;
+          font-size: 0.9rem;
 
           &::placeholder {
             color: rgba(255, 255, 255, 0.6);
@@ -62,20 +63,25 @@ $transition: all 0.3s ease;
         }
 
         .btn {
-          padding: 0.8rem 1.5rem;
-          background: $primary-color;
-          color: $text-color;
-          border: none;
-          border-radius: $border-radius;
-          cursor: pointer;
-          transition: $transition;
+          padding: 0.7rem 1.2rem;
+          font-size: 0.9rem;
+          background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 15%) 100%);
+          box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+          display: flex;
+          align-items: center;
+          gap: 0.3rem;
 
           &:hover {
-            background: darken($primary-color, 10%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
           }
 
           .icon {
-            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+          }
+
+          &:hover .icon {
+            transform: translateX(3px);
           }
         }
       }
@@ -88,10 +94,30 @@ $transition: all 0.3s ease;
       margin-bottom: 3rem;
 
       @media (max-width: 768px) {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .about, .quickLinks, .contact {
+      @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+
+        .inputDiv {
+          flex-direction: column;
+          width: 100%;
+
+          input {
+            width: 100%;
+          }
+
+          .btn {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+      }
+
+      .about,
+      .quickLinks,
+      .contact {
         background: $secondary-color;
         padding: 1.5rem;
         border-radius: $border-radius;
@@ -102,7 +128,8 @@ $transition: all 0.3s ease;
           margin-bottom: 1rem;
         }
 
-        p, li {
+        p,
+        li {
           margin-bottom: 1rem;
           font-size: 1rem;
           color: $text-light;
