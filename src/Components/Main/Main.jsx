@@ -58,7 +58,7 @@ const Main = () => {
   }, []);
 
   return (
-    <section className="main">
+    <section className="main" id="packages">
       <h2 className="section-title">Explore Our Tour Packages</h2>
       <div className="card-container">
         {tourPackages.map(({ id, title, description, details, image, price, offer }) => (

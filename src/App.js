@@ -7,6 +7,8 @@ import Main from './Components/Main/Main';
 import About from './Components/About/About';
 import Page from './Components/Page/Pages';
 import Contact from './Components/Contact/Contact';
+// import Popup from './Components/Popup/Popup';
+// import Popup from './Popup';
 
 
 function App() {
@@ -19,8 +21,11 @@ function App() {
       <Page />
       <Contact/>
       <Footer />
+      {/* <Popup /> */}
     </div>
   );
 }
 
 export default App;
+
+

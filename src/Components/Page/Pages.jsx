@@ -40,7 +40,7 @@ const Page = () => {
   }, [handleNext, handlePrev]);
 
   return (
-    <section className="videoSlider">
+    <section className="videoSlider" id="pages">
       <div className="heading">
         <h2>Memories</h2>
         <p>Dessa Valley Pictures</p>

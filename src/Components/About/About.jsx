@@ -23,7 +23,7 @@ const itemVariants = {
 
 const About = () => {
   return (
-    <section className="about">
+    <section className="about" id="about">
       <div className="secContainer">
         <motion.h2 
           className="title"
